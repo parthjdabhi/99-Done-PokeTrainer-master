@@ -106,7 +106,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.677741"
+                  timestampString = "492716375.905504"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "80"
@@ -121,7 +121,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.67802"
+                  timestampString = "492716375.905662"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "80"
@@ -154,7 +154,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.680081"
+                  timestampString = "492716375.906662"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "99"
@@ -169,7 +169,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.680244"
+                  timestampString = "492716375.906829"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "100"
@@ -202,7 +202,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.682207"
+                  timestampString = "492716375.908676"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "149"
@@ -217,7 +217,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.682437"
+                  timestampString = "492716375.908912"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "149"
@@ -1098,7 +1098,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendRequestViewController.swift"
-                  timestampString = "492691593.687788"
+                  timestampString = "492716375.914715"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
@@ -1113,7 +1113,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendRequestViewController.swift"
-                  timestampString = "492691593.688111"
+                  timestampString = "492716375.915027"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
@@ -1354,11 +1354,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeTrainerApp/MainScreenViewController.swift"
-            timestampString = "492618795.156877"
+            timestampString = "492713000.182472"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1370,27 +1370,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeTrainerApp/MainScreenViewController.swift"
-            timestampString = "492550233.030064"
+            timestampString = "492713000.182472"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PokeTrainerApp/MainScreenViewController.swift"
-            timestampString = "492618795.156877"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "timePassinHours(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1402,11 +1386,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeTrainerApp/MainScreenViewController.swift"
-            timestampString = "492550216.621755"
+            timestampString = "492713000.182472"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1626,7 +1610,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.704179"
+                  timestampString = "492716375.985766"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
@@ -1641,7 +1625,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.704539"
+                  timestampString = "492716375.985896"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "88"
@@ -1706,7 +1690,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.781175"
+                  timestampString = "492716375.988081"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "298"
@@ -1721,7 +1705,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.78138"
+                  timestampString = "492716375.988211"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "301"
@@ -1786,7 +1770,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.78468"
+                  timestampString = "492716375.990737"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "329"
@@ -1801,7 +1785,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.784842"
+                  timestampString = "492716375.990873"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "331"
@@ -1882,7 +1866,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.78964"
+                  timestampString = "492716375.993703"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "313"
@@ -1897,7 +1881,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/SearchViewController.swift"
-                  timestampString = "492691593.789809"
+                  timestampString = "492716375.993829"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "314"
@@ -1946,7 +1930,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.792379"
+                  timestampString = "492716375.995344"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
@@ -1961,7 +1945,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.793132"
+                  timestampString = "492716375.995473"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
@@ -1994,7 +1978,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.795368"
+                  timestampString = "492716375.99665"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "146"
@@ -2009,7 +1993,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.795619"
+                  timestampString = "492716375.996809"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "149"
@@ -2042,7 +2026,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.798668"
+                  timestampString = "492716375.998134"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "79"
@@ -2057,7 +2041,7 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/FriendReqTableViewCell.swift"
-                  timestampString = "492691593.799134"
+                  timestampString = "492716375.998288"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "80"
@@ -2298,11 +2282,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.814156"
+                  timestampString = "492716376.008384"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "185"
-                  endingLineNumber = "185"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
                   offsetFromSymbolStart = "23">
                </Location>
                <Location
@@ -2313,11 +2297,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.814367"
+                  timestampString = "492716376.008563"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "185"
-                  endingLineNumber = "185"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
                   offsetFromSymbolStart = "246">
                </Location>
             </Locations>
@@ -2346,11 +2330,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.815537"
+                  timestampString = "492716376.00959"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "184"
-                  endingLineNumber = "184"
+                  startingLineNumber = "185"
+                  endingLineNumber = "185"
                   offsetFromSymbolStart = "728">
                </Location>
                <Location
@@ -2361,11 +2345,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.815666"
+                  timestampString = "492716376.009721"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "185"
-                  endingLineNumber = "185"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
                   offsetFromSymbolStart = "23">
                </Location>
             </Locations>
@@ -2394,11 +2378,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.816753"
+                  timestampString = "492716376.010597"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
                   offsetFromSymbolStart = "23">
                </Location>
                <Location
@@ -2409,11 +2393,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.816945"
+                  timestampString = "492716376.010713"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
                   offsetFromSymbolStart = "246">
                </Location>
             </Locations>
@@ -2442,11 +2426,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.818305"
+                  timestampString = "492716376.011606"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "208"
-                  endingLineNumber = "208"
+                  startingLineNumber = "209"
+                  endingLineNumber = "209"
                   offsetFromSymbolStart = "2011">
                </Location>
                <Location
@@ -2457,11 +2441,11 @@
                   moduleName = "PokeTrainerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/PrivateChatViewController.swift"
-                  timestampString = "492691593.818556"
+                  timestampString = "492716376.011813"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
                   offsetFromSymbolStart = "23">
                </Location>
             </Locations>
@@ -2528,6 +2512,182 @@
             startingLineNumber = "704"
             endingLineNumber = "704"
             landmarkName = "-collectionView:canPerformAction:forItemAtIndexPath:withSender:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeTrainerApp/MainScreenViewController.swift"
+            timestampString = "492716251.233874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "updateUnreadRecentChatsCount()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeTrainerApp/MainScreenViewController.swift"
+            timestampString = "492716251.233874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "updateUnreadRecentChatsCount()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeTrainerApp.MainScreenViewController.(updateUnreadRecentChatsCount () -&gt; ()).(closure #1)"
+                  moduleName = "PokeTrainerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/MainScreenViewController.swift"
+                  timestampString = "492716376.016073"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
+                  offsetFromSymbolStart = "4318">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeTrainerApp.MainScreenViewController.(updateUnreadRecentChatsCount () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "PokeTrainerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/MainScreenViewController.swift"
+                  timestampString = "492716376.016374"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "27">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeTrainerApp/MainScreenViewController.swift"
+            timestampString = "492713365.465805"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "updateUnreadRecentChatsCount()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeTrainerApp/MainScreenViewController.swift"
+            timestampString = "492713365.465805"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "updateUnreadRecentChatsCount()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeTrainerApp.MainScreenViewController.updateUnreadRecentChatsCount () -&gt; ()"
+                  moduleName = "PokeTrainerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/MainScreenViewController.swift"
+                  timestampString = "492716376.018053"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "2225">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeTrainerApp.MainScreenViewController.(updateUnreadRecentChatsCount () -&gt; ()).(closure #1)"
+                  moduleName = "PokeTrainerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iparth/Downloads/99-Done-PokeTrainer-master/PokeTrainerApp/MainScreenViewController.swift"
+                  timestampString = "492716376.018184"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeTrainerApp/MainScreenViewController.swift"
+            timestampString = "492713296.01806"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "updateFriendRequestsCount()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeTrainerApp/MainScreenViewController.swift"
+            timestampString = "492713348.792295"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeTrainerApp/MainScreenViewController.swift"
+            timestampString = "492716251.233874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "updateUnreadRecentChatsCount()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

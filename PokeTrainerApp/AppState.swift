@@ -22,4 +22,7 @@ class AppState: NSObject {
     //var friend: UserData?
     
     let appBlueColor = UIColor.init(colorLiteralRed: (22.0/255.0), green: (104.0/255.0), blue: (143.0/255.0), alpha: 1)
+    
+    var friendReqCount = 0
+    var unreadChatCount = 0
 }

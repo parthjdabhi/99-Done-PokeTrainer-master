@@ -13,6 +13,9 @@ import SDWebImage
 
 class MainScreenViewController: UIViewController, PDGlobalTimerDelegate, PDLocationServiceDelegate {
  
+    @IBOutlet var lblBubbleFriendReq: UILabel?
+    @IBOutlet var lblBubbleChatCount: UILabel?
+    
     @IBOutlet var profileInfo: UILabel!
     @IBOutlet var profilePicture: UIImageView!
     var ref:FIRDatabaseReference!
@@ -24,6 +27,34 @@ class MainScreenViewController: UIViewController, PDGlobalTimerDelegate, PDLocat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lblBubbleFriendReq?.backgroundColor = UIColor.redColor()
+        lblBubbleFriendReq?.layer.borderWidth = 1
+        lblBubbleFriendReq?.layer.masksToBounds = true
+        lblBubbleFriendReq?.layer.borderColor = UIColor.whiteColor().CGColor
+        lblBubbleFriendReq?.layer.cornerRadius = lblBubbleFriendReq!.frame.height/2
+        
+        if AppState.sharedInstance.friendReqCount != 0 {
+            lblBubbleFriendReq?.text = String(format: "%d",AppState.sharedInstance.friendReqCount)
+            lblBubbleFriendReq?.hidden = false
+        } else {
+            lblBubbleFriendReq?.hidden = true
+        }
+        
+        
+        lblBubbleChatCount?.backgroundColor = UIColor.redColor()
+        lblBubbleChatCount?.layer.borderWidth = 1
+        lblBubbleChatCount?.layer.masksToBounds = true
+        lblBubbleChatCount?.layer.borderColor = UIColor.whiteColor().CGColor
+        lblBubbleChatCount?.layer.cornerRadius = lblBubbleChatCount!.frame.height/2
+        
+        if AppState.sharedInstance.unreadChatCount != 0 {
+            lblBubbleChatCount?.text = String(format: "%d",AppState.sharedInstance.unreadChatCount)
+            lblBubbleChatCount?.hidden = false
+        } else {
+            lblBubbleChatCount?.hidden = true
+        }
+        
         
         profilePicture.layer.borderWidth = 1
         profilePicture.layer.masksToBounds = false
@@ -82,6 +113,9 @@ class MainScreenViewController: UIViewController, PDGlobalTimerDelegate, PDLocat
         super.viewWillAppear(animated)
         PDGlobalTimer.sharedInstance().delegate = self
         PDLocationService.sharedInstance.delegate = self
+        
+        self.updateFriendRequestsCount()
+        self.updateUnreadRecentChatsCount()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -111,6 +145,113 @@ class MainScreenViewController: UIViewController, PDGlobalTimerDelegate, PDLocat
     func caloriesBurned(strCalories: String) {
         caloriesLabel?.text = strCalories
     }
+    
+    
+    func updateFriendRequestsCount() {
+        
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        
+        ref.child("users").child(userID!).child("userInfo").child("friendRequest").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            if let FriendReqRef = snapshot.valueInExportFormat() as? NSDictionary {
+                AppState.sharedInstance.friendReqCount = FriendReqRef.allValues.count
+            } else {
+                AppState.sharedInstance.friendReqCount = 0
+            }
+            if AppState.sharedInstance.friendReqCount != 0 {
+                self.lblBubbleFriendReq?.text = String(format: "%d",AppState.sharedInstance.friendReqCount)
+                self.lblBubbleFriendReq?.hidden = false
+            } else {
+                self.lblBubbleFriendReq?.hidden = true
+            }
+            
+        }) { (error) in
+        }
+        
+        if AppState.sharedInstance.friendReqCount != 0 {
+            lblBubbleFriendReq?.text = String(format: "%d",AppState.sharedInstance.friendReqCount)
+            lblBubbleFriendReq?.hidden = false
+        } else {
+            lblBubbleFriendReq?.hidden = true
+        }
+    }
+    
+    
+    func updateUnreadRecentChatsCount() {
+        
+        if AppState.sharedInstance.friendReqCount != 0 {
+            self.lblBubbleFriendReq?.text = String(format: "%d",AppState.sharedInstance.friendReqCount)
+            self.lblBubbleFriendReq?.hidden = false
+        } else {
+            self.lblBubbleFriendReq?.hidden = true
+        }
+        
+        let firstGroup = dispatch_group_create()
+        var recents: [AnyObject] = []
+        var recentIds: [AnyObject] = []
+        var UnreadChatCount = 0
+        
+        let userID = FIRAuth.auth()?.currentUser?.uid ?? ""
+        let firebase: FIRDatabaseReference = FIRDatabase.database().referenceWithPath(FRECENT_PATH)
+        dispatch_group_enter(firstGroup)
+        firebase.queryOrderedByChild(FRECENT_USERID).queryEqualToValue(userID).observeSingleEventOfType(.Value, withBlock: {(snapshot: FIRDataSnapshot) -> Void in
+            if snapshot.exists() {
+                recents.removeAll()
+                //Sort array by dict[FRECENT_UPDATEDAT]
+                let enumerator = snapshot.children
+                while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                    print(rest.value)
+                    if let dic = rest.value as? [String:AnyObject] {
+                        print("Convesation : \(dic)")
+                        recents.append(dic)
+                        recentIds.append(dic[FRECENT_GROUPID] as? String ?? "")
+                    
+                        let GroupId = dic[FRECENT_GROUPID] as? String ?? ""
+                        let firebase2: FIRDatabaseReference = FIRDatabase.database().referenceWithPath(FMESSAGE_PATH).child(GroupId)
+                        
+                        
+                        let OppUserId = dic[FRECENT_OPPUSERID] as? String ?? ""
+                        dispatch_group_enter(firstGroup)
+                        
+                        firebase2.queryOrderedByChild(FMESSAGE_STATUS).queryEqualToValue(TEXT_DELIVERED).observeSingleEventOfType(.Value, withBlock: {(snapshot: FIRDataSnapshot) -> Void in
+                            if snapshot.exists() {
+                                print(snapshot.childrenCount)
+                                let enumerator = snapshot.children
+                                var UnreadMsgCount = 0
+                                while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                                    print("rest.key =>>  \(rest.key) =>>   \(rest.value)")
+                                    if var dic = rest.value as? [String:AnyObject] where (dic[FRECENT_USERID] as? String ?? "") ==  OppUserId {
+                                        print(rest.key)
+                                        print("Convesation : \(dic)")
+                                        UnreadMsgCount += 1
+                                    }
+                                }
+                                if UnreadMsgCount != 0 {
+                                    UnreadChatCount += 1
+                                }
+                            }
+                            dispatch_group_leave(firstGroup)
+                        })
+                    }
+                }
+            }
+            dispatch_group_leave(firstGroup)
+            //createRecentObservers
+        })
+        
+        
+        dispatch_group_notify(firstGroup, dispatch_get_main_queue()) {
+            AppState.sharedInstance.unreadChatCount =  UnreadChatCount
+            if AppState.sharedInstance.unreadChatCount != 0 {
+                self.lblBubbleChatCount?.text = String(format: "%d",AppState.sharedInstance.unreadChatCount)
+                self.lblBubbleChatCount?.hidden = false
+            } else {
+                self.lblBubbleChatCount?.hidden = true
+            }
+        }
+        
+    }
+    
     
     @IBAction func logoutButton(sender: AnyObject) {
 //        let SettingQuesVC = self.storyboard?.instantiateViewControllerWithIdentifier("SettingQuesViewController") as! SettingQuesViewController!
