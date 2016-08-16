@@ -284,14 +284,27 @@ class ChatViewController: JSQMessagesViewController, MFMailComposeViewController
             
             mailComposerVC.setToRecipients(["support@poketrainerapp.com"])
             mailComposerVC.setSubject("Requset to block user")
-            mailComposerVC.setMessageBody("Message Id : \(message.key) \n Message Text: \(message.text) \nSent By : \(message.senderId) \nBlock Requset Sent by : \(myUserID ?? "") \n Reported on \(NSDate.init())", isHTML: false)
+            //mailComposerVC.setMessageBody("Message Id : \(message.key) \n Message Text: \(message.text) \nSent By : \(message.senderId) \nBlock Requset Sent by : \(myUserID ?? "") \n Reported on \(NSDate.init())", isHTML: false)
 
+            CommonUtils.sharedUtils.showProgress(self.view, label: "Waiting..")
+            FIRDatabase.database().reference().child("users").child(message.senderId).child("userInfo").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                
+                var email = ""
+                CommonUtils.sharedUtils.hideProgress()
+                
+                if let userInfo = snapshot.valueInExportFormat() as? NSDictionary {
+                   email = userInfo["email"] as? String ?? ""
+                }
+                
+                mailComposerVC.setMessageBody("Message Id : \(message.key) \n Message Text: \(message.text) Email  : \(email) \nSent By : \(message.senderId) \nBlock Requset Sent by : \(self.myUserID ?? "") \n Reported on \(NSDate.init())", isHTML: false)
+                if MFMailComposeViewController.canSendMail() {
+                    self.presentViewController(mailComposerVC, animated: true, completion: nil)
+                } else {
+                    self.showSendMailErrorAlert()
+                }
+            })
+                    
             
-            if MFMailComposeViewController.canSendMail() {
-                self.presentViewController(mailComposerVC, animated: true, completion: nil)
-            } else {
-                self.showSendMailErrorAlert()
-            }
             
         }
     }

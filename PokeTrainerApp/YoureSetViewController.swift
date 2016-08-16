@@ -25,7 +25,7 @@ class YoureSetViewController: UIViewController, CLLocationManagerDelegate {
         
         manager = CLLocationManager()
         manager.delegate = self
-        manager.desiredAccuracy - kCLLocationAccuracyBest
+        manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
     }
@@ -63,6 +63,12 @@ class YoureSetViewController: UIViewController, CLLocationManagerDelegate {
             }
         })
     }
+    
+    @IBAction func actionmainScreen(sender: AnyObject) {
+        let mainScreenViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainScreenViewController") as! MainScreenViewController!
+        self.navigationController?.pushViewController(mainScreenViewController, animated: true)
+    }
+    
     
     @IBAction func pairUp(sender: AnyObject) {
 //        let mainScreenViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainScreenViewController") as! MainScreenViewController!

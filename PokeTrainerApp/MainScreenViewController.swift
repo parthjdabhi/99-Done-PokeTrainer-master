@@ -69,7 +69,7 @@ class MainScreenViewController: UIViewController, PDGlobalTimerDelegate, PDLocat
         ref = FIRDatabase.database().reference()
         user = FIRAuth.auth()?.currentUser
         let userID = FIRAuth.auth()?.currentUser?.uid
-        
+
         ref.child("users").child(userID!).child("profileData").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             AppState.sharedInstance.currentUser = snapshot
             if let base64String = snapshot.value!["userPhoto"] as? String {

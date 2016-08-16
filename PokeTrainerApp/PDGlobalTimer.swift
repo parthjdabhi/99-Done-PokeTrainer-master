@@ -160,6 +160,9 @@ class PDGlobalTimer: NSObject {
         //FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("userInfo").setValue(["HelthData": ["totalSecondsElapsed":  self.totalSecondsElapsed!]])
         PDLocationService.sharedInstance.traveledDistanceSavingOffset = PDLocationService.sharedInstance.traveledDistanceOnLocal
         
+        //timer.invalidate()
+        //startTimer()
+        
         FIRDatabase.database().reference().child("users").child(user.uid).child("userInfo").observeSingleEventOfType(.Value, withBlock: {(snapshot: FIRDataSnapshot) -> Void in
             if snapshot.exists() {
                 print(snapshot.childrenCount) // I got the expected number of items
@@ -191,13 +194,13 @@ class PDGlobalTimer: NSObject {
                     self.isTimerSyncOnServerInProgress = true
                     self.totalElapsedSavingOffset = self.totalSecondsElapsedOnLocal
                     self.totalSecondsElapsedOnServer = snapshot.value!["totalSecondsElapsed"] as? Double ?? 0
-                    
+                    let SyncStartdate = NSDate()
                     FIRDatabase.database().reference().child("users").child(user.uid).child("userInfo").updateChildValues(["totalSecondsElapsed":  self.totalSecondsElapsedOnServer + self.totalElapsedSavingOffset], withCompletionBlock: { (error, ref) in
                         self.isTimerSyncOnServerInProgress = false
                         if error == nil {
                             // update server count
                             debugPrint("Before Update totalSecondsElapsedOnServer \(self.totalSecondsElapsedOnServer) totalSecondsElapsedOnLocal : \(self.totalSecondsElapsedOnLocal)  totalElapsedSavingOffset : \(self.totalElapsedSavingOffset)")
-                            
+                            self.internalTimerStartDate = SyncStartdate
                             self.totalSecondsElapsedOnServer = self.totalSecondsElapsedOnServer + self.totalElapsedSavingOffset
                             self.totalSecondsElapsedOnLocal = self.totalSecondsElapsedOnLocal - self.totalElapsedSavingOffset
                             debugPrint("After Update totalSecondsElapsedOnServer \(self.totalSecondsElapsedOnServer)  totalSecondsElapsedOnLocal : \(self.totalSecondsElapsedOnLocal)")

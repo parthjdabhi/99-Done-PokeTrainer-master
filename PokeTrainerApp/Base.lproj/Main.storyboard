@@ -558,12 +558,24 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tme-uO-cBi">
+                                <rect key="frame" x="21" y="29" width="18" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tme-uO-cBi" secondAttribute="height" multiplier="8:13" id="Tku-sz-Bj9"/>
+                                    <constraint firstAttribute="width" constant="18" id="ayL-fb-iaa"/>
+                                </constraints>
+                                <state key="normal" image="ArrowBack.png"/>
+                                <connections>
+                                    <action selector="actionmainScreen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UUN-8R-MMV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QfN-ec-YwZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0TQ-VL-j99"/>
                             <constraint firstItem="QfN-ec-YwZ" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="8iH-bl-Koc"/>
                             <constraint firstItem="9pe-1V-Kdp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C9G-eS-L3X"/>
+                            <constraint firstItem="QfN-ec-YwZ" firstAttribute="leading" secondItem="tme-uO-cBi" secondAttribute="trailing" constant="-39" id="DQB-oA-Dt4"/>
                             <constraint firstAttribute="trailing" secondItem="QfN-ec-YwZ" secondAttribute="trailing" id="JaN-hf-fPJ"/>
                             <constraint firstItem="vh7-de-L6T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="O2Q-cN-Ffu"/>
                             <constraint firstItem="vh7-de-L6T" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Yiq-Bv-9W3"/>
@@ -574,6 +586,7 @@
                             <constraint firstItem="ast-Dp-sKN" firstAttribute="centerY" secondItem="YKO-wh-lul" secondAttribute="centerY" id="rqi-MG-jq1"/>
                             <constraint firstItem="ast-Dp-sKN" firstAttribute="centerX" secondItem="YKO-wh-lul" secondAttribute="centerX" id="sKj-7o-FOa"/>
                             <constraint firstItem="9pe-1V-Kdp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="zUp-nu-hwH"/>
+                            <constraint firstItem="QfN-ec-YwZ" firstAttribute="top" secondItem="tme-uO-cBi" secondAttribute="bottom" constant="-58" id="zp5-o7-NsL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dQN-zl-0RS"/>
