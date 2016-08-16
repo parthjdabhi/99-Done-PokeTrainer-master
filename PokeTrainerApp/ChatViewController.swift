@@ -12,18 +12,23 @@ import Firebase
 import JSQMessagesViewController
 import SDWebImage
 
-class ChatViewController: JSQMessagesViewController {
+import Foundation
+import MessageUI
+
+class ChatViewController: JSQMessagesViewController, MFMailComposeViewControllerDelegate {
   
     // MARK: Properties
     var city: String!
+    var cityNodeName = "caht_"
+    let myUserID = FIRAuth.auth()?.currentUser?.uid
     
     let rootRef = FIRDatabase.database().reference()
     var messageRef: FIRDatabaseReference!
     var messages = [JSQMessage]()
 
-    
     var userIsTypingRef: FIRDatabaseReference!
     var usersTypingQuery: FIRDatabaseQuery!
+    
     private var localTyping = false
     var isTyping: Bool {
     get {
@@ -43,12 +48,14 @@ class ChatViewController: JSQMessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBubbles()
-        messageRef = rootRef.child("Chat_\(self.city)")
+        
+        cityNodeName = "Chat_\(self.city)"
+        messageRef = rootRef.child(cityNodeName)
 
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.topContentAdditionalInset = 44
 
+        setupBubbles()
         // No avatars
         //collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
@@ -71,6 +78,10 @@ class ChatViewController: JSQMessagesViewController {
         
         self.view.addSubview(navigationBar)
         
+        JSQMessagesCollectionViewCell.registerMenuAction(#selector(ChatViewController.spam(_:)))
+        JSQMessagesCollectionViewCell.registerMenuAction(#selector(ChatViewController.reportUser(_:)))
+        UIMenuController.sharedMenuController().menuItems = [UIMenuItem.init(title: "Block", action: #selector(ChatViewController.spam(_:))),UIMenuItem.init(title: "Report user", action: #selector(ChatViewController.reportUser(_:)))]
+        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -86,6 +97,229 @@ class ChatViewController: JSQMessagesViewController {
     override func  preferredStatusBarStyle()-> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
+    
+    
+    
+    //Start Blocking functions
+    func didReviceMenuAction() {
+        print("didReviceMenuAction")
+    }
+    
+    func spam(sender: AnyObject?) {
+        print("Block user")
+    }
+    
+    func reportUser(sender: AnyObject?) {
+        print("Report user")
+    }
+    
+    override func didReceiveMenuWillShowNotification(notification: NSNotification!) {
+        UIMenuController.sharedMenuController().menuItems = nil
+        UIMenuController.sharedMenuController().menuItems = [UIMenuItem.init(title: "Block", action: #selector(ChatViewController.spam(_:))),UIMenuItem.init(title: "Report user", action: #selector(ChatViewController.reportUser(_:)))]
+    }
+    
+    
+    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+
+        let message = messages[indexPath.item]
+        if message.senderId == senderId {
+            //CANNOT BLOCK MY SELF
+            return false
+        } else {
+            return true
+        }
+        //return true
+    }
+    
+    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+        
+        print(action)
+        let message = messages[indexPath.item]
+        if message.senderId == senderId {
+            //CANNOT BLOCK MY SELF
+            return false
+        } else {
+            return (action == #selector(ChatViewController.spam(_:))) || (action == #selector(ChatViewController.reportUser(_:)))
+        }
+        //return action == #selector(PrivateChatViewController.spam(_:))
+    }
+    
+    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+        if  action == #selector(ChatViewController.spam(_:)){
+            print("Block user")
+            //Remove recent chat
+            //Set Friend status to Zero
+            //Remove from friend list
+            
+            
+            let message = messages[indexPath.item]
+            
+            if message.senderId == senderId {
+                //CANNOT BLOCK MY SELF
+            }
+            else
+            {
+                CommonUtils.sharedUtils.showProgress(self.view, label: "Blocking User..")
+                /// Add Block users entry
+                //let ref: FIRDatabaseReference = FIRDatabase.database().reference().child(cityNodeName).child("\(cityNodeName)_blockedUser")
+                let ref: FIRDatabaseReference = FIRDatabase.database().reference().child("\(cityNodeName)_blockedUser")
+                //let friendRequestRef = ref.childByAutoId()
+                //friendRequestRef.setValue(myUserID)
+                ref.child(message.senderId!).setValue("1")
+                
+                //Remove That message
+                FIRDatabase.database().reference().child(cityNodeName).child(message.key).removeValue()
+                
+                self.messages.removeObject(message)
+                
+                self.collectionView.deleteItemsAtIndexPaths([indexPath])
+                
+                CommonUtils.sharedUtils.hideProgress()
+            }
+            
+            
+            
+//            CommonUtils.sharedUtils.showProgress(self.view, label: "Blocking User..")
+//            
+//            let MyGroup = dispatch_group_create()
+//            
+//            //Remove Friends Id to my myfriend
+//            dispatch_group_enter(MyGroup)
+//            ref.child("users").child(senderId).child("myFriends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+//                if let FriendReqUserDetail = snapshot.valueInExportFormat() as? NSDictionary {
+//                    let arrFriends =  NSMutableArray(array: FriendReqUserDetail.allValues)
+//                    //print("\(self.UserID) :: \(arrFriendReqs)")
+//                    
+//                    if arrFriends.containsObject(self.OppUserId!) {
+//                        arrFriends.removeObject(self.OppUserId!)
+//                        dispatch_group_enter(MyGroup)
+//                        self.ref.child("users").child(self.senderId).updateChildValues(["myFriends":arrFriends]) { (error, reference) in
+//                            
+//                            if error == nil {
+//                                print("successfully Removed MyUserID from their myFriends ")
+//                            }else  {
+//                                print("Faail to remove id From myFriends array")
+//                            }
+//                            dispatch_group_leave(MyGroup)
+//                        }
+//                    }
+//                }
+//                dispatch_group_leave(MyGroup)
+//            })
+//            
+//            //Remove My user Id to Friends's myfriend
+//            dispatch_group_enter(MyGroup)
+//            ref.child("users").child(self.OppUserId!).child("myFriends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+//                if let FriendReqUserDetail = snapshot.valueInExportFormat() as? NSDictionary {
+//                    let arrFriends =  NSMutableArray(array: FriendReqUserDetail.allValues)
+//                    //print("MyUserID >> \(self.MyUserID) :: \(arrFriendReqs)")
+//                    
+//                    if arrFriends.containsObject(self.senderId!) {
+//                        arrFriends.removeObject(self.senderId!)
+//                        dispatch_group_enter(MyGroup)
+//                        self.ref.child("users").child(self.OppUserId!).updateChildValues(["myFriends":arrFriends]) { (error, reference) in
+//                            
+//                            if error == nil {
+//                                print("successfully Removed Friend id from my myFriends ")
+//                            }else  {
+//                                print("Faail to remove id From myFriends array")
+//                            }
+//                            dispatch_group_leave(MyGroup)
+//                        }
+//                    }
+//                }
+//                dispatch_group_leave(MyGroup)
+//            })
+//            
+//            //groupId
+//            //Remove conversation messages
+//            print("Removing groupId : \(groupId)")
+//            self.ref.child(FMESSAGE_PATH).child(groupId!).removeValue()
+//            
+//            //Remove Recent Entries
+//            let firebase: FIRDatabaseReference = FIRDatabase.database().referenceWithPath(cityNodeName)
+//            let query: FIRDatabaseQuery = firebase.queryOrderedByChild(FRECENT_GROUPID).queryEqualToValue(groupId)
+//            dispatch_group_enter(MyGroup)
+//            query.observeSingleEventOfType(.Value, withBlock: {(snapshot: FIRDataSnapshot) -> Void in
+//                if snapshot.exists() {
+//                    print(snapshot.childrenCount) // I got the expected number of items
+//                    let enumerator = snapshot.children
+//                    while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+//                        print(rest.key)
+//                        print("Removing : \(rest.key)")
+//                        self.ref.child(FRECENT_PATH).child(rest.key).removeValue()
+//                        //                        if let dictionary = rest.value as? [NSString : AnyObject]
+//                        //                            where ((dictionary[FRECENT_USERID] as! String) == self.MyUserID! || (dictionary[FRECENT_USERID] as! String) == self.senderId!)
+//                        //                        {
+//                        //                            print("Removing : \(rest.key)")
+//                        //                            //self.ref.child(FRECENT_PATH).child(rest.key).removeValue()
+//                        //                        }
+//                    }
+//                }
+//                dispatch_group_leave(MyGroup)
+//            })
+//            
+//            //self.FirRef?.child("users").child(self.MyUserID!).child("myFriends").child(self.MyUserID!).removeValue()
+//            
+//            dispatch_group_notify(MyGroup, dispatch_get_main_queue()) {
+//                CommonUtils.sharedUtils.hideProgress()
+//                
+//                let MainScreenVC: MainScreenViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainScreenViewController") as! MainScreenViewController
+//                self.navigationController?.pushViewController(MainScreenVC, animated: true)
+//            }
+        }
+        else if  action == #selector(ChatViewController.reportUser(_:))
+        {
+            let message = messages[indexPath.item]
+            
+            if message.senderId == senderId {
+                //CANNOT BLOCK MY SELF
+                return
+            }
+            
+            //Messageid,userid,email and message text
+            
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+            
+            mailComposerVC.setToRecipients(["support@poketrainerapp.com"])
+            mailComposerVC.setSubject("Requset to block user")
+            mailComposerVC.setMessageBody("Message Id : \(message.key) \n Message Text: \(message.text) \nSent By : \(message.senderId) \nBlock Requset Sent by : \(myUserID ?? "") \n Reported on \(NSDate.init())", isHTML: false)
+
+            
+            if MFMailComposeViewController.canSendMail() {
+                self.presentViewController(mailComposerVC, animated: true, completion: nil)
+            } else {
+                self.showSendMailErrorAlert()
+            }
+            
+        }
+    }
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: nil, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+        
+        let sendMailErrorAlert = UIAlertView(title: "Message", message: (error == nil) ? "Thank you,\n Your report submitted successfully. Our team will soon takes appropriate action." : "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: nil, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        if action == #selector(ChatViewController.spam(_:)) {
+            return true
+        }
+        else if action == #selector(ChatViewController.reportUser(_:)) {
+            return true
+        }
+        return super.canPerformAction(action, withSender:sender)
+    }
+    //End  Blocking Functions
+    
     
     //Go Back to Previous screen
     @IBAction func ActionGoBack(sender: AnyObject) {
@@ -142,7 +376,7 @@ class ChatViewController: JSQMessagesViewController {
             //cell.avatarImageView.sd_setImageWithURL(NSURL.init(string:self.userSession.profilePictureUrl), placeholderImage: UIImage(named: "POKE-TRAINER-LOGO.png"))
         }
 
-        
+        cell.textView.selectable = false
         
         return cell
     }
@@ -218,13 +452,15 @@ class ChatViewController: JSQMessagesViewController {
     private func observeMessages() {
         let messagesQuery = messageRef.queryLimitedToLast(25)
         messagesQuery.observeEventType(.ChildAdded, withBlock: { (snapshot) in
-            let id = snapshot.value!["senderId"] as! String
-            let text = snapshot.value!["text"] as! String
-            let senderName = snapshot.value!["senderName"] as? String ?? id
-            let createdAt = snapshot.value!["createdAt"] as? String ?? ""
-            
-            self.addMessage(id, text: text,displayName: senderName,createdAt: createdAt)
-            self.finishReceivingMessage()
+            if let id = snapshot.value!["senderId"] as? String {
+                //let id = snapshot.value!["senderId"] as! String
+                let text = snapshot.value!["text"] as! String
+                let senderName = snapshot.value!["senderName"] as? String ?? id
+                let createdAt = snapshot.value!["createdAt"] as? String ?? ""
+                
+                self.addMessage(id, text: text,displayName: senderName,createdAt: createdAt,key: snapshot.key)
+                self.finishReceivingMessage()
+            }
         })
     }
 
@@ -247,11 +483,11 @@ class ChatViewController: JSQMessagesViewController {
 
     }
 
-    func addMessage(id: String, text: String,displayName: String,createdAt: String) {
+    func addMessage(id: String, text: String,displayName: String,createdAt: String,key: String) {
         
         let message = JSQMessage(senderId: id, senderDisplayName: displayName, date: createdAt.asDate, text: text)
         //JSQMessage(senderId: id, displayName: id, text: text)
-
+        message.key = key
         messages.append(message)
     }
 
@@ -283,4 +519,14 @@ class ChatViewController: JSQMessagesViewController {
         incomingBubbleImageView = bubbleImageFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     }
   
+}
+
+extension RangeReplaceableCollectionType where Generator.Element : Equatable {
+    
+    // Remove first collection element that is equal to the given `object`:
+    mutating func removeObject(object : Generator.Element) {
+        if let index = self.indexOf(object) {
+            self.removeAtIndex(index)
+        }
+    }
 }

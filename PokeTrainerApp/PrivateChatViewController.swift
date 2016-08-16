@@ -150,22 +150,25 @@ class PrivateChatViewController: JSQMessagesViewController {
     
     
     override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        let message = jsqmessages[indexPath.item]
-//        if message.senderId != senderId {
-//            return true
-//        }
-//        return false
-        return true
+        let message = jsqmessages[indexPath.item]
+        if message.senderId == senderId {
+            return false
+        } else {
+            return true
+        }
+        //return false
     }
     
     override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-//        let message = jsqmessages[indexPath.item]
-//        if message.senderId != senderId {
-//            return action == #selector(PrivateChatViewController.spam(_:))
-//        }
-//        return false
-        print(action)
-        return action == #selector(PrivateChatViewController.spam(_:))
+        
+        let message = jsqmessages[indexPath.item]
+        if message.senderId == senderId {
+            return false
+        } else {
+            return action == #selector(PrivateChatViewController.spam(_:))
+        }
+        //print(action)
+        //return action == #selector(PrivateChatViewController.spam(_:))
         //return action == #selector(NSObject.copy(_:)) || action == #selector(PrivateChatViewController.spam(_:))
     }
     
@@ -407,11 +410,9 @@ class PrivateChatViewController: JSQMessagesViewController {
         message[FMESSAGE_CREATEDAT] = NSDate().customFormatted
         
         //Add Jsq Message
-        let userId = message[FMESSAGE_USERID] as? String ?? ""
-        let name = message[FMESSAGE_USER_NAME] as? String ?? ""
-        
-        /// <#Description#>let date = (message[FMESSAGE_CREATEDAT] as! String).asDate
-        
+        //let userId = message[FMESSAGE_USERID] as? String ?? ""
+        //let name = message[FMESSAGE_USER_NAME] as? String ?? ""
+        //let date = (message[FMESSAGE_CREATEDAT] as! String).asDate
         //let maskOutgoing = (MyUserID == (message[FMESSAGE_USERID] as? String ?? ""))
         //let jsqMsg = JSQMessage.init(senderId: userId, senderDisplayName: name, date: date, text: text)
         //self.jsqmessages.append(jsqMsg)
@@ -500,7 +501,7 @@ class PrivateChatViewController: JSQMessagesViewController {
                 }})
         }
         
-        
+        cell.textView?.selectable = false
         
         return cell
     }

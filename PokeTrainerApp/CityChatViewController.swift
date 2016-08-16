@@ -97,11 +97,58 @@ class CityChatViewController: UIViewController, UITableViewDelegate, UITableView
         cityId = cityId.stringByReplacingOccurrencesOfString(" ", withString: "")
         cityId = cityId.stringByReplacingOccurrencesOfString(".", withString: "")
         
-        let chatVc = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController!
-        chatVc.city = cityId
-        chatVc.senderId = FIRAuth.auth()?.currentUser?.uid
-        chatVc.senderDisplayName = "User"
-        self.navigationController?.pushViewController(chatVc, animated: true)
+        //Check is user is blocked ??
+        CommonUtils.sharedUtils.showProgress(self.view, label: "Please wait..")
+        
+        let firebase: FIRDatabaseReference = FIRDatabase.database().referenceWithPath("Chat_\(cityId)_blockedUser")
+//        let query: FIRDatabaseQuery = firebase.queryOrderedByChild((FIRAuth.auth()?.currentUser?.uid)!).queryEqualToValue("1")
+//        query.observeSingleEventOfType(.Value, withBlock: {(snapshot: FIRDataSnapshot) -> Void in
+//            CommonUtils.sharedUtils.hideProgress()
+//            if snapshot.exists() {
+//                print(snapshot.childrenCount) // I got the expected number of items
+//                let enumerator = snapshot.children
+//                while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+//                    print(rest.key)
+//                    print("founds block entry with key : \(rest.key)")
+//                }
+//                CommonUtils.sharedUtils.showAlert(self, title: "Alert", message: "Opps, sorry you are blocked for this group!")
+//            } else {
+//                let chatVc = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController!
+//                chatVc.city = cityId
+//                chatVc.senderId = FIRAuth.auth()?.currentUser?.uid
+//                chatVc.senderDisplayName = AppState.sharedInstance.displayName ?? ""
+////                self.navigationController?.pushViewController(chatVc, animated: true)
+//            }
+//        })
+        
+        firebase.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+            var isBlockedUser = false
+            
+            CommonUtils.sharedUtils.hideProgress()
+            
+            if snapshot.exists() {
+                print(snapshot.childrenCount)
+                if let blockedUsers = snapshot.value as? [String: String]{
+                    for (key,value) in blockedUsers {
+                        if key == (FIRAuth.auth()?.currentUser?.uid)!
+                            && value == "1"
+                        {
+                            isBlockedUser = true
+                            print("isBlockedUser : true")
+                        }
+                    }
+                }
+            }
+            if isBlockedUser == true {
+                CommonUtils.sharedUtils.showAlert(self, title: "Alert", message: "Opps, sorry you are blocked for this group!")
+            } else {
+                let chatVc = self.storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController!
+                chatVc.city = cityId
+                chatVc.senderId = FIRAuth.auth()?.currentUser?.uid
+                chatVc.senderDisplayName = AppState.sharedInstance.displayName ?? ""
+                self.navigationController?.pushViewController(chatVc, animated: true)
+            }
+        }
         
     }
 }
