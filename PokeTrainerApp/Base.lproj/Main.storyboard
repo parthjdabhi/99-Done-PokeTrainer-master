@@ -2743,22 +2743,32 @@
                                                             <constraint firstAttribute="height" constant="24" id="EtB-e9-FDI"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                        <state key="normal" title="Update Photo">
+                                                        <state key="normal" title="Add Photo">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="takePhoto:" destination="net-7U-YyV" eventType="touchUpInside" id="FKZ-ca-Mad"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LXZ-HR-hEl">
+                                                        <rect key="frame" x="125" y="38" width="125" height="125"/>
+                                                        <connections>
+                                                            <action selector="takePhoto:" destination="net-7U-YyV" eventType="touchUpInside" id="8OM-YJ-gyk"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="LXZ-HR-hEl" firstAttribute="width" secondItem="Jde-VE-gPO" secondAttribute="width" id="0bS-ff-rvN"/>
                                                     <constraint firstItem="Jde-VE-gPO" firstAttribute="centerY" secondItem="F7W-Xm-uCE" secondAttribute="centerY" id="15C-8x-OQ7"/>
+                                                    <constraint firstItem="LXZ-HR-hEl" firstAttribute="centerX" secondItem="Jde-VE-gPO" secondAttribute="centerX" id="1X6-bl-WrH"/>
+                                                    <constraint firstItem="LXZ-HR-hEl" firstAttribute="height" secondItem="Jde-VE-gPO" secondAttribute="height" id="3MX-dg-qrS"/>
                                                     <constraint firstItem="Jde-VE-gPO" firstAttribute="leading" secondItem="kmB-0l-Z6h" secondAttribute="leading" id="6ot-PI-ER1"/>
                                                     <constraint firstItem="9Qv-9X-URD" firstAttribute="leading" secondItem="F7W-Xm-uCE" secondAttribute="leading" id="6xC-BP-fVo"/>
                                                     <constraint firstItem="Jde-VE-gPO" firstAttribute="top" secondItem="sjj-qo-0ya" secondAttribute="bottom" constant="8" symbolic="YES" id="BZe-kk-fvR"/>
                                                     <constraint firstItem="sjj-qo-0ya" firstAttribute="top" secondItem="F7W-Xm-uCE" secondAttribute="top" id="CFe-8h-J1d"/>
                                                     <constraint firstAttribute="trailing" secondItem="9Qv-9X-URD" secondAttribute="trailing" id="DEu-lE-H02"/>
+                                                    <constraint firstItem="LXZ-HR-hEl" firstAttribute="centerY" secondItem="Jde-VE-gPO" secondAttribute="centerY" id="N6g-C2-N2X"/>
                                                     <constraint firstAttribute="bottom" secondItem="9Qv-9X-URD" secondAttribute="bottom" id="NUU-Jp-dx9"/>
                                                     <constraint firstItem="MUp-yg-8HI" firstAttribute="leading" secondItem="F7W-Xm-uCE" secondAttribute="leading" id="Oc5-Yx-Np1"/>
                                                     <constraint firstItem="Jde-VE-gPO" firstAttribute="centerY" secondItem="F7W-Xm-uCE" secondAttribute="centerY" id="PNm-2f-Auu"/>

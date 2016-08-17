@@ -56,6 +56,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         
         self.view.layoutIfNeeded()
         
+        btn_UpdatePhoto.setTitle("Add Photo", forState: .Normal)
+        
         btn_Team_MYSTIC.setBorder()
         btn_Team_MYSTIC.tag = 1
         btn_Play_CASUAL.setBorder()
@@ -226,6 +228,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         
         self.imgTaken = true
         dismissViewControllerAnimated(true, completion: nil)
+        btn_UpdatePhoto.setTitle("Update Photo", forState: .Normal)
     }
     
     func imgToBase64(image: UIImage) -> String {

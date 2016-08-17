@@ -296,7 +296,7 @@ class ChatViewController: JSQMessagesViewController, MFMailComposeViewController
                    email = userInfo["email"] as? String ?? ""
                 }
                 
-                mailComposerVC.setMessageBody("Message Id : \(message.key) \n Message Text: \(message.text) Email  : \(email) \nSent By : \(message.senderId) \nBlock Requset Sent by : \(self.myUserID ?? "") \n Reported on \(NSDate.init())", isHTML: false)
+                mailComposerVC.setMessageBody("Message Id : \(message.key) \n Message Text: \(message.text) Email  : \(email) \nSent By : \(message.senderId) \nBlock Requset Sent by : \(self.myUserID ?? "") \n Reported on \(NSDate.init()) for group chat", isHTML: false)
                 if MFMailComposeViewController.canSendMail() {
                     self.presentViewController(mailComposerVC, animated: true, completion: nil)
                 } else {

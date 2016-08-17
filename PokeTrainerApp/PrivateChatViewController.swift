@@ -10,7 +10,10 @@ import Firebase
 import JSQMessagesViewController
 import Alamofire
 
-class PrivateChatViewController: JSQMessagesViewController {
+import Foundation
+import MessageUI
+
+class PrivateChatViewController: JSQMessagesViewController, MFMailComposeViewControllerDelegate {
     
     // MARK: Properties
     var userIsTypingRef: FIRDatabaseReference!
@@ -100,7 +103,8 @@ class PrivateChatViewController: JSQMessagesViewController {
         
         
         JSQMessagesCollectionViewCell.registerMenuAction(#selector(PrivateChatViewController.spam(_:)))
-        UIMenuController.sharedMenuController().menuItems = [UIMenuItem.init(title: "Block", action: #selector(PrivateChatViewController.spam(_:)))]
+        JSQMessagesCollectionViewCell.registerMenuAction(#selector(PrivateChatViewController.reportUser(_:)))
+        UIMenuController.sharedMenuController().menuItems = [UIMenuItem.init(title: "Block", action: #selector(PrivateChatViewController.spam(_:))),UIMenuItem.init(title: "Report user", action: #selector(PrivateChatViewController.reportUser(_:)))]
         
         ClearRecentCounter(groupId!)
         
@@ -141,11 +145,17 @@ class PrivateChatViewController: JSQMessagesViewController {
         print("Block user")
     }
     
+    func reportUser(sender: AnyObject?) {
+        print("Report user")
+    }
+    
+    
     override func didReceiveMenuWillShowNotification(notification: NSNotification!) {
         //let menu:UIMenuController? = notification.object as? UIMenuController
         //menu?.menuItems = [UIMenuItem(title: "Block", action: #selector(PrivateChatViewController.spam(_:)))]
         UIMenuController.sharedMenuController().menuItems = nil
         UIMenuController.sharedMenuController().menuItems = [UIMenuItem(title: "Block", action: #selector(PrivateChatViewController.spam(_:)))]
+        UIMenuController.sharedMenuController().menuItems = [UIMenuItem.init(title: "Block", action: #selector(PrivateChatViewController.spam(_:))),UIMenuItem.init(title: "Report user", action: #selector(PrivateChatViewController.reportUser(_:)))]
     }
     
     
@@ -165,7 +175,7 @@ class PrivateChatViewController: JSQMessagesViewController {
         if message.senderId == senderId {
             return false
         } else {
-            return action == #selector(PrivateChatViewController.spam(_:))
+            return (action == #selector(PrivateChatViewController.spam(_:))) || (action == #selector(PrivateChatViewController.reportUser(_:)))
         }
         //print(action)
         //return action == #selector(PrivateChatViewController.spam(_:))
@@ -173,7 +183,8 @@ class PrivateChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-        if  action == #selector(PrivateChatViewController.spam(_:)){
+        if  action == #selector(PrivateChatViewController.spam(_:))
+        {
             print("Block user")
             //Remove recent chat
             //Set Friend status to Zero
@@ -268,14 +279,72 @@ class PrivateChatViewController: JSQMessagesViewController {
                 self.navigationController?.pushViewController(MainScreenVC, animated: true)
             }
         }
+        else if  action == #selector(PrivateChatViewController.reportUser(_:))
+        {
+            let message = messages[indexPath.item] as? [String:AnyObject] ?? [:]
+            
+            let userId = message[FMESSAGE_USERID] as? String ?? ""
+            let name = message[FMESSAGE_USER_NAME] as? String ?? ""
+            let date = (message[FMESSAGE_CREATEDAT] as? String ?? "").asDate
+            let text = message[FMESSAGE_TEXT] as? String ?? ""
+            
+            if userId == senderId {
+                //CANNOT BLOCK MY SELF
+                return
+            }
+            
+            //Messageid,userid,email and message text
+            
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+            
+            mailComposerVC.setToRecipients(["support@poketrainerapp.com"])
+            mailComposerVC.setSubject("Requset to block user")
+            //mailComposerVC.setMessageBody("Message Id : \(message.key) \n Message Text: \(message.text) \nSent By : \(message.senderId) \nBlock Requset Sent by : \(myUserID ?? "") \n Reported on \(NSDate.init())", isHTML: false)
+            
+            CommonUtils.sharedUtils.showProgress(self.view, label: "Waiting..")
+            FIRDatabase.database().reference().child("users").child(userId).child("userInfo").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                
+                var email = ""
+                CommonUtils.sharedUtils.hideProgress()
+                
+                if let userInfo = snapshot.valueInExportFormat() as? NSDictionary {
+                    email = userInfo["email"] as? String ?? ""
+                }
+                
+                mailComposerVC.setMessageBody("message Id : \(self.groupId ?? "") \n Message Text: \(text) Email  : \(email) (\(name)) \nSent By : \(self.senderId) on \(date) \nBlock Requset Sent by : \(FIRAuth.auth()?.currentUser?.uid ?? "") \n Reported on \(NSDate.init()) for personal chat", isHTML: false)
+                if MFMailComposeViewController.canSendMail() {
+                    self.presentViewController(mailComposerVC, animated: true, completion: nil)
+                } else {
+                    self.showSendMailErrorAlert()
+                }
+            })
+            
+        }
     }
-    
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
         if action == #selector(PrivateChatViewController.spam(_:)) {
             return true
         }
+        else if action == #selector(PrivateChatViewController.reportUser(_:)) {
+            return true
+        }
         return super.canPerformAction(action, withSender:sender)
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: nil, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+        
+        let sendMailErrorAlert = UIAlertView(title: "Message", message: (error == nil) ? "Thank you,\n Your report submitted successfully. Our team will soon takes appropriate action." : "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: nil, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
     }
     
     func ClearRecentCounter( groupId:String)
